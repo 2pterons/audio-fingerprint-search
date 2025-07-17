@@ -21,7 +21,7 @@
 ---
 
 ## 설치 방법
-※ ffmpeg가 설치되어 있어야 pydub이 mp3 파일을 읽을 수 있습니다.
+※ ffmpeg가 설치되어 있어야 pydub이 mp3 파일을 읽을 수 있습니다.  
 Ubuntu 예: sudo apt install ffmpeg
 
 ```bash
@@ -37,7 +37,7 @@ python run_demo.py build-db
 ```
 
 2. 쿼리 오디오 자르기 (예: 80~90초 잘라서 query_segment.wav 저장)
-```
+```bash
 python run_demo.py cut-query \
   --file_name I_fall_in_love_too_easily.mp3 \
   --start_time 80 \
