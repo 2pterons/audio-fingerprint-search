@@ -27,22 +27,26 @@ Ubuntu 예: sudo apt install ffmpeg
 ```bash
 git clone https://github.com/2pterons/ai-champion.git
 cd ai-champion
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 ## 데모 사용 방법
 1. DB 생성
 ```bash
-python run_demo.py build-db```
+python run_demo.py build-db
+```
 
 2. 쿼리 오디오 자르기 (예: 80~90초 잘라서 query_segment.wav 저장)
-```bash
+```
 python run_demo.py cut-query \
   --file_name I_fall_in_love_too_easily.mp3 \
   --start_time 80 \
-  --duration 10```
+  --duration 10
+```
 
 3. 쿼리 오디오로 검색
 ```bash
 python run_demo.py query \
-   --query ../data/query_segment-[파일명].wav```
+   --query ../data/query_segment-[파일명].wav
+```
 
