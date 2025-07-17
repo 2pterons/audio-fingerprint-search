@@ -23,6 +23,6 @@
 ## 데모 사용 방법
 
 ```bash
-git clone https://github.com/your-username/ai-music-fingerprint-demo.git
-cd ai-music-fingerprint-demo
+git clone https://github.com/2pterons/ai-champion.git
+cd ai-champion
 pip install -r requirements.txt
