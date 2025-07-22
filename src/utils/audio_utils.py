@@ -5,6 +5,11 @@ import torchaudio
 from pydub import AudioSegment
 
 def split_audio_torch(file_path, segment_length=5, model_name="clap"):
+    try:
+        torchaudio.set_audio_backend("sox_io")
+    except Exception as e:
+        print("백엔드 설정 실패:", e)
+        
     if file_path.endswith(".mp3"):
         wav_path = os.path.splitext(file_path)[0] + ".wav"
         audio = AudioSegment.from_mp3(file_path)
@@ -13,7 +18,11 @@ def split_audio_torch(file_path, segment_length=5, model_name="clap"):
         file_path = wav_path
 
     target_sr = 48000 if model_name == "clap" else 16000
-    waveform, sr = torchaudio.load(file_path)
+    try:
+        waveform, sr = torchaudio.load(file_path)
+    except:
+        waveform, sr = sf.read(file_path, dtype="float32")
+        
 
     # Resample
     if sr != target_sr:
@@ -38,7 +47,7 @@ def split_audio_torch(file_path, segment_length=5, model_name="clap"):
 
     return segments, target_sr
 
-def split_audio_pydub(input_path, output_dir="../../audio_segments", segment_duration=3):
+def split_audio_pydub(input_path, output_dir="./audio_segments", segment_duration=3):
     os.makedirs(output_dir, exist_ok=True)
     audio_name = os.path.basename(input_path)
     audio = AudioSegment.from_file(input_path)
