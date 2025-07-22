@@ -14,7 +14,6 @@ def main():
     parser.add_argument("--audio_dir", type=str, help="Directory with audio files")
     parser.add_argument("--query_path", type=str, help="Path to query segment")
     parser.add_argument("--save_query", action="store_true", help="Save query waveform as .pt file")
-
     parser.add_argument("--segment_duration", type=int, default=5)
 
     args = parser.parse_args()
@@ -27,7 +26,7 @@ def main():
     elif args.task == "split":
         if not args.audio_path:
             raise ValueError("`--audio_path` is required for splitting")
-        split_audio_pydub(args.audio_path)
+        split_audio_pydub(input_path=args.audio_path, segment_duration=args.segment_duration)
 
     elif args.task == "search":
         if not args.query_path:

@@ -45,9 +45,10 @@ pip install -r requirements.txt
 python main.py --model clap --task embed --audio_dir ./audio_samples
 ```
 
-### 2️. 검색용 오디오 쪼개기 (3초 단위)
+### 2️. 검색용 오디오 쪼개기 (기본 5초)
 ```bash
 python main.py --model clap --task split --audio_path ./audio_samples/example.wav
+python main.py --model clap --task split --audio_path ./audio_samples/example.wav --segment_duration 5
 ```
 
 ### 3️. 검색 수행 (직접 검색 + 옵션으로 쿼리 저장도 가능)
@@ -91,7 +92,7 @@ python main.py --model clap --task search --query_path ./audio_segments/example.
 ## 테스트 준비 팁
 
 - `audio_samples/`에 mp3 또는 wav 오디오 파일을 넣고 테스트하세요
-- `audio_segments/` 폴더는 자동 생성됩니다 (없으면 만들어짐)
+- `audio_segments/` 폴더는 자동 생성됩니다
 - 검색용 쿼리는 `.wav` 또는 `.pt` 형태 모두 지원됩니다
 
 ---
