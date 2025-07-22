@@ -1,6 +1,9 @@
+import os
 import argparse
-from models.wavlm_utils import get_wavlm_embedding
-from models.clap_utils import get_clap_embedding
+import torchaudio
+import torch
+from src.core import milvus_ops, embedding_ops, faiss_ops
+from src.utils.audio_utils import split_audio_pydub
 
 def main():
     parser = argparse.ArgumentParser(description="Audio Embedding Search Controller")
@@ -41,23 +44,25 @@ def main():
         if not args.query_path:
             raise ValueError("`--query_path` is required for search")
         # embedding_ops.search(args.user, args.model, args.query_path)
-        # WAV 파일을 로드하고 waveform Tensor로 전달
-        waveform, sr = torchaudio.load(args.query_path)
-        waveform = waveform.mean(dim=0, keepdim=True)
-        target_sr = 48000 if args.model == "clap" else 16000
-        if sr != target_sr:
-            waveform = torchaudio.functional.resample(waveform, sr, target_sr)
+        
+        waveform = args.query_path
 
-        # 임시 torch 파일로 저장 (faiss_ops가 torch.load 사용 중)
-        if args.save_query:
-            os.makedirs("queries", exist_ok=True)
-            base_name = os.path.splitext(os.path.basename(args.query_path))[0]
-            save_path = os.path.join("queries", f"{base_name}.pt")
-            torch.save(waveform, save_path)
-            print(f"쿼리 waveform 저장됨: {save_path}")
-            faiss_ops.search(args.model, "temp_query.pt")
-        else:
-            faiss_ops.search(args.model, waveform)
+        if args.query_path.endswith(".wav"):
+            waveform, sr = torchaudio.load(args.query_path)
+            waveform = waveform.mean(dim=0, keepdim=True)
+            target_sr = 48000 if args.model == "clap" else 16000
+            if sr != target_sr:
+                waveform = torchaudio.functional.resample(waveform, sr, target_sr)
+
+            # 임시 torch 파일로 저장 (faiss_ops가 torch.load 사용 중)
+            if args.save_query:
+                os.makedirs("queries", exist_ok=True)
+                base_name = os.path.splitext(os.path.basename(args.query_path))[0]
+                save_path = os.path.join("queries", f"{base_name}.pt")
+                torch.save(waveform, save_path)
+                print(f"쿼리 waveform 저장됨: {save_path}")
+
+        faiss_ops.search(args.model, waveform)
 
 if __name__ == "__main__":
     main()
