@@ -5,6 +5,13 @@ import torchaudio
 from pydub import AudioSegment
 
 def split_audio_torch(file_path, segment_length=5, model_name="clap"):
+    if file_path.endswith(".mp3"):
+        wav_path = os.path.splitext(file_path)[0] + ".wav"
+        audio = AudioSegment.from_mp3(file_path)
+        audio.export(wav_path, format="wav")
+        print(f"변환됨: {file_path} => {wav_path}")
+        file_path = wav_path
+
     target_sr = 48000 if model_name == "clap" else 16000
     waveform, sr = torchaudio.load(file_path)
 
