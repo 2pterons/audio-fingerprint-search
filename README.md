@@ -31,8 +31,8 @@ audio-embedding-search/
 ```bash
 conda create -n [가상환경이름] python=3.11
 conda activate [가상환경이름]
-git clone https://github.com/2pterons/ai-champion.git
-cd ai-champion
+git clone https://github.com/2pterons/audio-embedding-search.git
+cd audio-embedding-search
 pip install -r requirements.txt
 ```
 > `ffmpeg` 설치 필요 (mp3 지원 시)
