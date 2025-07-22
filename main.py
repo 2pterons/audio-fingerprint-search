@@ -8,7 +8,6 @@ from src.utils.audio_utils import split_audio_pydub
 def main():
     parser = argparse.ArgumentParser(description="Audio Embedding Search Controller")
 
-    parser.add_argument("--user", required=True)
     parser.add_argument("--model", choices=["clap", "wavlm"], required=True)
     parser.add_argument("--task", choices=["init", "embed", "split", "search"], required=True)
     parser.add_argument("--audio_path", type=str, help="Path to single audio file")
@@ -23,7 +22,6 @@ def main():
     if args.task == "embed":
         if not args.audio_dir:
             raise ValueError("`--audio_dir` is required for embedding")
-        # embedding_ops.embed_and_insert(args.user, args.model, args.audio_dir, args.segment_duration)
         faiss_ops.embed_and_save(args.model, args.audio_dir, args.segment_duration)
 
     elif args.task == "split":
@@ -34,7 +32,6 @@ def main():
     elif args.task == "search":
         if not args.query_path:
             raise ValueError("`--query_path` is required for search")
-        # embedding_ops.search(args.user, args.model, args.query_path)
         
         waveform = args.query_path
 
