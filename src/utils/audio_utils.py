@@ -31,7 +31,7 @@ def split_audio_torch(file_path, segment_length=5, model_name="clap"):
 
     return segments, target_sr
 
-def split_audio_pydub(input_path, output_dir="./segments", segment_duration=3):
+def split_audio_pydub(input_path, output_dir="../../audio_segments", segment_duration=3):
     os.makedirs(output_dir, exist_ok=True)
     audio_name = os.path.basename(input_path)
     audio = AudioSegment.from_file(input_path)
