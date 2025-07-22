@@ -2,7 +2,6 @@ import os
 import argparse
 import torchaudio
 import torch
-# from src.core import milvus_ops, embedding_ops, faiss_ops
 from src.core import faiss_ops
 from src.utils.audio_utils import split_audio_pydub
 
@@ -17,20 +16,11 @@ def main():
     parser.add_argument("--query_path", type=str, help="Path to query segment")
     parser.add_argument("--save_query", action="store_true", help="Save query waveform as .pt file")
 
-    parser.add_argument("--milvus_host", type=str, default="localhost")
-    parser.add_argument("--milvus_port", type=str, default="19530")
-    
-
     parser.add_argument("--segment_duration", type=int, default=5)
 
     args = parser.parse_args()
 
-    # connections.connect(host=args.milvus_host, port=args.milvus_port)
-
-    if args.task == "init":
-        milvus_ops.init_collection(args.model)
-
-    elif args.task == "embed":
+    if args.task == "embed":
         if not args.audio_dir:
             raise ValueError("`--audio_dir` is required for embedding")
         # embedding_ops.embed_and_insert(args.user, args.model, args.audio_dir, args.segment_duration)
