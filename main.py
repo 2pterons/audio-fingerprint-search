@@ -2,7 +2,8 @@ import os
 import argparse
 import torchaudio
 import torch
-from src.core import milvus_ops, embedding_ops, faiss_ops
+# from src.core import milvus_ops, embedding_ops, faiss_ops
+from src.core import faiss_ops
 from src.utils.audio_utils import split_audio_pydub
 
 def main():
