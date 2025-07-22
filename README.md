@@ -29,24 +29,14 @@ audio-embedding-search/
 ## 설치
 
 ```bash
+conda create -n [가상환경이름] python=3.11
+conda activate [가상환경이름]
+git clone https://github.com/2pterons/ai-champion.git
+cd ai-champion
 pip install -r requirements.txt
 ```
 > `ffmpeg` 설치 필요 (mp3 지원 시)
-
 ---
-## 시스템 요구사항
-
-다음 시스템 패키지가 필요합니다 
-
-### Ubuntu:
-```bash
-sudo apt update
-sudo apt install ffmpeg sox libsox-fmt-all
-```
-### macOS:
-```bash
-brew install ffmpeg sox
-```
 
 ## 사용법
 
