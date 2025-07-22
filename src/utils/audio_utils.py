@@ -5,10 +5,10 @@ import torchaudio
 from pydub import AudioSegment
 
 def split_audio_torch(file_path, segment_length=5, model_name="clap"):
-    try:
-        torchaudio.set_audio_backend("sox_io")
-    except Exception as e:
-        print("백엔드 설정 실패:", e)
+    # try:
+    #     torchaudio.set_audio_backend("sox_io")
+    # except Exception as e:
+    #     print("백엔드 설정 실패:", e)
         
     if file_path.endswith(".mp3"):
         wav_path = os.path.splitext(file_path)[0] + ".wav"
