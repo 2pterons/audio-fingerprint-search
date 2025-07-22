@@ -25,7 +25,7 @@ def main():
 
     args = parser.parse_args()
 
-    connections.connect(host=args.milvus_host, port=args.milvus_port)
+    # connections.connect(host=args.milvus_host, port=args.milvus_port)
 
     if args.task == "init":
         milvus_ops.init_collection(args.model)
