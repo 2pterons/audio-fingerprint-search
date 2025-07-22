@@ -12,7 +12,7 @@ audio-embedding-search/
 ├── main.py                  # 실행 엔트리포인트
 ├── requirements.txt         # 필요한 패키지 목록
 ├── audio_samples/           # 임베딩할 원본 오디오 파일
-├── segments/                # 검색용 오디오 세그먼트 (.wav)
+├── audio_segments/          # 검색용 오디오 세그먼트 (.wav)
 ├── queries/                 # 저장된 쿼리 waveform (.pt)
 ├── faiss_index/             # FAISS 인덱스 및 메타데이터
 └── src/
@@ -50,10 +50,10 @@ python main.py --model clap --task split --audio_path ./audio_samples/example.wa
 ### 3️. 검색 수행 (직접 검색 + 옵션으로 쿼리 저장도 가능)
 ```bash
 # 검색만
-python main.py --model clap --task search --query_path ./segments/example_003_00m03s.wav
+python main.py --model clap --task search --query_path ./audio_segments/example_003_00m03s.wav
 
 # 검색 + 쿼리 waveform 저장 (.pt)
-python main.py --model clap --task search --query_path ./segments/example.wav --save_query
+python main.py --model clap --task search --query_path ./audio_segments/example.wav --save_query
 ```
 
 ---
@@ -61,9 +61,9 @@ python main.py --model clap --task search --query_path ./segments/example.wav --
 ## 검색 결과 예시
 ```
 검색 결과
-   1. 🎵 song1 @ 00:15  (sim=0.8913)
-   2. 🎵 song2 @ 00:45  (sim=0.8741)
-   3. 🎵 song3 @ 01:00  (sim=0.8502)
+   1. song1 @ 00:15  (sim=0.8913)
+   2. song2 @ 00:45  (sim=0.8741)
+   3. song3 @ 01:00  (sim=0.8502)
 ```
 
 ---
@@ -88,7 +88,7 @@ python main.py --model clap --task search --query_path ./segments/example.wav --
 ## 테스트 준비 팁
 
 - `audio_samples/`에 mp3 또는 wav 오디오 파일을 넣고 테스트하세요
-- `segments/` 폴더는 자동 생성됩니다 (없으면 만들어짐)
+- `audio_segments/` 폴더는 자동 생성됩니다 (없으면 만들어짐)
 - 검색용 쿼리는 `.wav` 또는 `.pt` 형태 모두 지원됩니다
 
 ---
