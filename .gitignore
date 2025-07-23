@@ -1,0 +1,5 @@
+.env
+legacy/
+utils/__pycache__/
+audio_segments/
+fingerprint_db.pkl

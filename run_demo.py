@@ -23,8 +23,8 @@ fp = FingerPrint()
 if args.mode == "build-db":
     print("Fingerprint DB 생성 중...")
     file_paths = [
-        os.path.join("../audio_samples", f)
-        for f in os.listdir("../audio_samples")
+        os.path.join("./audio_samples", f)
+        for f in os.listdir("./audio_samples")
         if f.endswith(".mp3") or f.endswith(".wav")
     ]
     db = fp.build_fingerprint_db(file_paths, segment_duration_ms=args.segment_duration_ms, sr=args.sr)
@@ -36,9 +36,9 @@ if args.mode == "build-db":
 elif args.mode == "cut-query":
     if not args.query:
         # output_path = f"../audio_samples/query_segment.wav"
-        output_path = f"../audio_segments/{os.path.splitext(args.file_name)[0]}.wav"
+        output_path = f"./audio_segments/{os.path.splitext(args.file_name)[0]}.wav"
         y, sr = fp.extract_segment(
-            os.path.join("../audio_samples", args.file_name),
+            os.path.join("./audio_samples", args.file_name),
             start_time=args.start_time,
             duration=args.duration,
             
@@ -48,7 +48,7 @@ elif args.mode == "cut-query":
         print(f"쿼리 오디오 segment 생성 완료: {output_path}")
 
 elif args.mode == "cut-multi":
-    input_path = os.path.join("../audio_samples", args.file_name)
+    input_path = os.path.join("./audio_samples", args.file_name)
     output_dir = "../audio_segments"
     os.makedirs(output_dir, exist_ok=True)
 
