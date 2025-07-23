@@ -34,6 +34,10 @@ python run_demo.py build-db
 
 2. 쿼리 오디오 자르기 (예: 80~90초 잘라서 query_segment.wav 저장)
 ```bash
+python run_demo.py cut-multi
+```
+or
+```bash
 python run_demo.py cut-query \
   --file_name I_fall_in_love_too_easily.mp3 \
   --start_time 80 \
@@ -43,6 +47,6 @@ python run_demo.py cut-query \
 3. 쿼리 오디오로 검색
 ```bash
 python run_demo.py query \
-   --query ../data/query_segment-[파일명].wav
+   --query [파일명].wav
 ```
 

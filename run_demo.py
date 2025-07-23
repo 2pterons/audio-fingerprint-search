@@ -37,6 +37,7 @@ elif args.mode == "cut-query":
     if not args.query:
         # output_path = f"../audio_samples/query_segment.wav"
         output_path = f"./audio_segments/{os.path.splitext(args.file_name)[0]}.wav"
+        os.makedirs("audio_segments", exist_ok=True)
         y, sr = fp.extract_segment(
             os.path.join("./audio_samples", args.file_name),
             start_time=args.start_time,
@@ -49,7 +50,7 @@ elif args.mode == "cut-query":
 
 elif args.mode == "cut-multi":
     input_path = os.path.join("./audio_samples", args.file_name)
-    output_dir = "../audio_segments"
+    output_dir = "./audio_segments"
     os.makedirs(output_dir, exist_ok=True)
 
     audio = AudioSegment.from_file(input_path)
@@ -80,7 +81,7 @@ elif args.mode == "query":
         db = pickle.load(f)
 
     match_file, match_start, match_score = fp.search_query(
-        query_audio_path=args.query,
+        query_audio_path="./audio_segments/" + args.query,
         fp_db=db,
         segment_duration_ms=args.segment_duration_ms,
         sr=args.sr
